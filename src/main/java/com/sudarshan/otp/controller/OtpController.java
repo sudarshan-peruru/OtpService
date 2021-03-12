@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sudarshan.otp.service.GenerateOtpService;
+import com.sudarshan.otp.service.RegistrationOtpService;
 import com.sudarshan.otp.service.ValidateOtpService;
+import com.sudarshan.otp.service.ValidateRegistrationOtpService;
 
 @RestController
 @RequestMapping(value = "/otp")
@@ -18,6 +20,10 @@ public class OtpController {
 	GenerateOtpService generateOtpService;
 	@Autowired
 	ValidateOtpService validateOtpService;
+	@Autowired
+	RegistrationOtpService registrationOtpService;
+	@Autowired
+	ValidateRegistrationOtpService validateRegistrationOtpService;
 	
 	
 	@GetMapping(value = "/generateOtp")
@@ -29,5 +35,15 @@ public class OtpController {
 	@GetMapping(value = "/validateOtp")
 	public Boolean validateOtp(@RequestParam String email, @RequestParam int otpVal) {
 		return validateOtpService.validateOtp(email, otpVal);
+	}
+	
+	@GetMapping(value = "/registrationOtp")
+	public int registrationOtp(@RequestParam String email) {
+		return registrationOtpService.registerOtp(email);
+	}
+	
+	@GetMapping(value = "/registrationValidateOtp")
+	public int name(@RequestParam String email, @RequestParam int otpVal) {
+		return validateRegistrationOtpService.validateRegistrationOtp(email, otpVal);
 	}
 }

@@ -18,7 +18,7 @@ public class ValidateOtpService {
 		
 		Optional<UserDetails> userDetails = otpRepInterface.findById(email);
 		if(userDetails.isPresent()) {
-			if((userDetails.get().getOtp() == otpVal)) {
+			if((userDetails.get().getOtp() == otpVal) && (userDetails.get().getVerified() == 1)) {
 				return true;
 			}
 		}

@@ -24,11 +24,11 @@ public class GenerateOtpService {
         otp[0] = numbers.charAt(rndm_method.nextInt(numbers.length())); 
         for (int i = 1; i < len; i++) { 
             otp[i] = numbers0.charAt(rndm_method.nextInt(numbers0.length())); 
-        } 
+        }
         int otpVal = Integer.parseInt(String.valueOf(otp));
         Optional<UserDetails> userDetails = otpRepInterface.findById(email);
         if(userDetails.isPresent()) {
-        	otpRepInterface.save(new UserDetails(email, otpVal));
+        	otpRepInterface.save(new UserDetails(email, otpVal, 1));
             return otpVal;
         }
         else {
